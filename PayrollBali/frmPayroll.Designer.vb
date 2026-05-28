@@ -33,6 +33,7 @@ Partial Class frmPayroll
         OpenFileDialog1 = New OpenFileDialog()
         lblFileExcelImport = New Label()
         GroupBox1 = New GroupBox()
+        cbUpdateExisting = New CheckBox()
         btnExportToExcel = New Button()
         btnExit = New Button()
         btnProccess = New Button()
@@ -72,7 +73,6 @@ Partial Class frmPayroll
         Label7 = New Label()
         Panel1 = New Panel()
         btnCopydgSummary = New Button()
-        cbUpdateExisting = New CheckBox()
         CType(dgTimeSheet, ComponentModel.ISupportInitialize).BeginInit()
         GroupBox1.SuspendLayout()
         CType(dgSummary, ComponentModel.ISupportInitialize).BeginInit()
@@ -88,7 +88,8 @@ Partial Class frmPayroll
         Label1.Name = "Label1"
         Label1.Size = New Size(76, 20)
         Label1.TabIndex = 0
-        Label1.Text = "Start Date"' 
+        Label1.Text = "Start Date"
+        ' 
         ' dtpStartDate
         ' 
         dtpStartDate.Format = DateTimePickerFormat.Short
@@ -104,7 +105,8 @@ Partial Class frmPayroll
         Label2.Name = "Label2"
         Label2.Size = New Size(70, 20)
         Label2.TabIndex = 2
-        Label2.Text = "End Date"' 
+        Label2.Text = "End Date"
+        ' 
         ' dtpEndDate
         ' 
         dtpEndDate.Format = DateTimePickerFormat.Short
@@ -153,7 +155,8 @@ Partial Class frmPayroll
         ' 
         ' OpenFileDialog1
         ' 
-        OpenFileDialog1.FileName = "OpenFileDialog1"' 
+        OpenFileDialog1.FileName = "OpenFileDialog1"
+        ' 
         ' lblFileExcelImport
         ' 
         lblFileExcelImport.AutoSize = True
@@ -161,7 +164,8 @@ Partial Class frmPayroll
         lblFileExcelImport.Name = "lblFileExcelImport"
         lblFileExcelImport.Size = New Size(15, 20)
         lblFileExcelImport.TabIndex = 8
-        lblFileExcelImport.Text = "-"' 
+        lblFileExcelImport.Text = "-"
+        ' 
         ' GroupBox1
         ' 
         GroupBox1.Controls.Add(cbUpdateExisting)
@@ -179,6 +183,16 @@ Partial Class frmPayroll
         GroupBox1.Size = New Size(1262, 125)
         GroupBox1.TabIndex = 9
         GroupBox1.TabStop = False
+        ' 
+        ' cbUpdateExisting
+        ' 
+        cbUpdateExisting.AutoSize = True
+        cbUpdateExisting.Location = New Point(461, 21)
+        cbUpdateExisting.Name = "cbUpdateExisting"
+        cbUpdateExisting.Size = New Size(171, 24)
+        cbUpdateExisting.TabIndex = 14
+        cbUpdateExisting.Text = "Update Existing Data"
+        cbUpdateExisting.UseVisualStyleBackColor = True
         ' 
         ' btnExportToExcel
         ' 
@@ -215,7 +229,8 @@ Partial Class frmPayroll
         lblproses.Name = "lblproses"
         lblproses.Size = New Size(17, 23)
         lblproses.TabIndex = 10
-        lblproses.Text = "-"' 
+        lblproses.Text = "-"
+        ' 
         ' btnClearFile
         ' 
         btnClearFile.Location = New Point(6, 19)
@@ -255,7 +270,8 @@ Partial Class frmPayroll
         Label3.Name = "Label3"
         Label3.Size = New Size(152, 41)
         Label3.TabIndex = 12
-        Label3.Text = "Summary"' 
+        Label3.Text = "Summary"
+        ' 
         ' btnRefreshSum
         ' 
         btnRefreshSum.Location = New Point(171, 765)
@@ -272,7 +288,8 @@ Partial Class frmPayroll
         lblCounttext.Name = "lblCounttext"
         lblCounttext.Size = New Size(55, 20)
         lblCounttext.TabIndex = 14
-        lblCounttext.Text = "Count :"' 
+        lblCounttext.Text = "Count :"
+        ' 
         ' lblCount
         ' 
         lblCount.AutoSize = True
@@ -281,7 +298,8 @@ Partial Class frmPayroll
         lblCount.Name = "lblCount"
         lblCount.Size = New Size(18, 20)
         lblCount.TabIndex = 15
-        lblCount.Text = "0"' 
+        lblCount.Text = "0"
+        ' 
         ' lblCountSum
         ' 
         lblCountSum.AutoSize = True
@@ -290,7 +308,8 @@ Partial Class frmPayroll
         lblCountSum.Name = "lblCountSum"
         lblCountSum.Size = New Size(18, 20)
         lblCountSum.TabIndex = 17
-        lblCountSum.Text = "0"' 
+        lblCountSum.Text = "0"
+        ' 
         ' Label5
         ' 
         Label5.AutoSize = True
@@ -298,7 +317,8 @@ Partial Class frmPayroll
         Label5.Name = "Label5"
         Label5.Size = New Size(55, 20)
         Label5.TabIndex = 16
-        Label5.Text = "Count :"' 
+        Label5.Text = "Count :"
+        ' 
         ' btnClearSerach
         ' 
         btnClearSerach.Location = New Point(1074, 24)
@@ -331,7 +351,8 @@ Partial Class frmPayroll
         Label4.Name = "Label4"
         Label4.Size = New Size(119, 20)
         Label4.TabIndex = 20
-        Label4.Text = "Employee Name"' 
+        Label4.Text = "Employee Name"
+        ' 
         ' Label6
         ' 
         Label6.AutoSize = True
@@ -339,7 +360,8 @@ Partial Class frmPayroll
         Label6.Name = "Label6"
         Label6.Size = New Size(81, 20)
         Label6.TabIndex = 21
-        Label6.Text = "Auto Sum :"' 
+        Label6.Text = "Auto Sum :"
+        ' 
         ' lblCountAutoSum
         ' 
         lblCountAutoSum.AutoSize = True
@@ -348,7 +370,8 @@ Partial Class frmPayroll
         lblCountAutoSum.Name = "lblCountAutoSum"
         lblCountAutoSum.Size = New Size(18, 20)
         lblCountAutoSum.TabIndex = 22
-        lblCountAutoSum.Text = "0"' 
+        lblCountAutoSum.Text = "0"
+        ' 
         ' GroupBox2
         ' 
         GroupBox2.Controls.Add(Label1)
@@ -364,7 +387,8 @@ Partial Class frmPayroll
         GroupBox2.Size = New Size(1262, 66)
         GroupBox2.TabIndex = 23
         GroupBox2.TabStop = False
-        GroupBox2.Text = "Search"' 
+        GroupBox2.Text = "Search"
+        ' 
         ' GroupBox3
         ' 
         GroupBox3.Controls.Add(btnCancel)
@@ -388,7 +412,8 @@ Partial Class frmPayroll
         GroupBox3.Size = New Size(1399, 83)
         GroupBox3.TabIndex = 24
         GroupBox3.TabStop = False
-        GroupBox3.Text = "Add Data Payroll"' 
+        GroupBox3.Text = "Add Data Payroll"
+        ' 
         ' btnCancel
         ' 
         btnCancel.Location = New Point(1299, 41)
@@ -421,7 +446,8 @@ Partial Class frmPayroll
         Label13.Name = "Label13"
         Label13.Size = New Size(94, 20)
         Label13.TabIndex = 12
-        Label13.Text = "Actual Hours"' 
+        Label13.Text = "Actual Hours"
+        ' 
         ' txtBreaks
         ' 
         txtBreaks.Location = New Point(857, 43)
@@ -436,7 +462,8 @@ Partial Class frmPayroll
         Label12.Name = "Label12"
         Label12.Size = New Size(52, 20)
         Label12.TabIndex = 10
-        Label12.Text = "Breaks"' 
+        Label12.Text = "Breaks"
+        ' 
         ' txtClokOff
         ' 
         txtClokOff.Location = New Point(682, 43)
@@ -451,7 +478,8 @@ Partial Class frmPayroll
         Label11.Name = "Label11"
         Label11.Size = New Size(70, 20)
         Label11.TabIndex = 8
-        Label11.Text = "Clock Off"' 
+        Label11.Text = "Clock Off"
+        ' 
         ' txtClockOn
         ' 
         txtClockOn.Location = New Point(504, 43)
@@ -466,7 +494,8 @@ Partial Class frmPayroll
         Label10.Name = "Label10"
         Label10.Size = New Size(68, 20)
         Label10.TabIndex = 6
-        Label10.Text = "Clock On"' 
+        Label10.Text = "Clock On"
+        ' 
         ' Label9
         ' 
         Label9.AutoSize = True
@@ -474,7 +503,8 @@ Partial Class frmPayroll
         Label9.Name = "Label9"
         Label9.Size = New Size(41, 20)
         Label9.TabIndex = 5
-        Label9.Text = "Date"' 
+        Label9.Text = "Date"
+        ' 
         ' dtpDateAdd
         ' 
         dtpDateAdd.Format = DateTimePickerFormat.Short
@@ -497,7 +527,8 @@ Partial Class frmPayroll
         Label8.Name = "Label8"
         Label8.Size = New Size(80, 20)
         Label8.TabIndex = 2
-        Label8.Text = "First Name"' 
+        Label8.Text = "First Name"
+        ' 
         ' txtLastName
         ' 
         txtLastName.Location = New Point(12, 45)
@@ -512,7 +543,8 @@ Partial Class frmPayroll
         Label7.Name = "Label7"
         Label7.Size = New Size(79, 20)
         Label7.TabIndex = 0
-        Label7.Text = "Last Name"' 
+        Label7.Text = "Last Name"
+        ' 
         ' Panel1
         ' 
         Panel1.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
@@ -544,16 +576,6 @@ Partial Class frmPayroll
         btnCopydgSummary.TabIndex = 25
         btnCopydgSummary.Text = "Copy Data"
         btnCopydgSummary.UseVisualStyleBackColor = True
-        ' 
-        ' cbUpdateExisting
-        ' 
-        cbUpdateExisting.AutoSize = True
-        cbUpdateExisting.Location = New Point(461, 21)
-        cbUpdateExisting.Name = "cbUpdateExisting"
-        cbUpdateExisting.Size = New Size(171, 24)
-        cbUpdateExisting.TabIndex = 14
-        cbUpdateExisting.Text = "Update Existing Data"
-        cbUpdateExisting.UseVisualStyleBackColor = True
         ' 
         ' frmPayroll
         ' 

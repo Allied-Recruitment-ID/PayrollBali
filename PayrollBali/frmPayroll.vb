@@ -392,7 +392,6 @@ Public Class frmPayroll
             Dim row As String = ""
             Dim sheetNameForUpdateExcell As String = ""
 
-
             Me.Cursor = Cursors.WaitCursor
             ' Create new Application.
             Dim excel As tesExcel.Application = New tesExcel.Application
@@ -466,6 +465,12 @@ Public Class frmPayroll
                                         If array(j, 4) Is Nothing Then
                                             idImport = array(j, 1)
                                             employeeName = array(j, 2)
+
+                                            ' VALIDASI DATE
+                                            If String.IsNullOrWhiteSpace(Convert.ToString(array(j, 3))) Then
+                                                Throw New Exception("Date is missing on row " & j & ". Please correct the Excel file before importing again.")
+                                            End If
+
                                             dates = DateTime.ParseExact(array(j, 3), "d", CultureInfo.CurrentCulture)
                                             datesFixed = dates.ToString("yyyy-MM-dd HH:mm:ss")
                                             clockOn = ""
@@ -1305,31 +1310,142 @@ ExitAllFor:
         End Try
     End Sub
 
+    'Private Sub PasteCells()
+    '    Try
+    '        Dim s = Clipboard.GetText
+    '        Dim ci = dgTimeSheet.CurrentCell.ColumnIndex
+    '        Dim ri = dgTimeSheet.CurrentCell.RowIndex
+    '        Dim colCount = dgTimeSheet.Columns.Count
+    '        Dim rowCount = dgTimeSheet.Rows.Count
+    '        dgTimeSheet.BeginEdit(True)
+
+    '        For Each r In s.Split({ControlChars.CrLf}, StringSplitOptions.None)
+    '            Dim Cell = ci
+    '            For Each c In r.Split({ControlChars.Tab}, StringSplitOptions.None)
+    '                If Cell >= colCount Then Exit For
+    '                dgTimeSheet(Cell, ri).Value = c
+    '                Cell += 1
+    '            Next
+    '            ri += 1
+    '            If ri >= rowCount Then Exit For
+    '        Next
+
+    '        dgTimeSheet.EndEdit()
+    '    Catch ex As Exception
+    '        logger.writeLog(Me.GetType().Name, ex.Message & vbCrLf & ex.StackTrace)
+    '    End Try
+    'End Sub
+
+    'Private Sub PasteCells()
+    '    Try
+    '        Dim s = Clipboard.GetText()
+    '        dgTimeSheet.BeginEdit(True)
+
+
+    '        If String.IsNullOrWhiteSpace(s) Then Exit Sub
+
+    '        ' 👉 ambil value pertama dari clipboard
+    '        Dim firstValue As String = s.Split({ControlChars.Tab, ControlChars.CrLf}, StringSplitOptions.RemoveEmptyEntries)(0)
+
+    '        If dgTimeSheet.SelectedCells.Count > 1 Then
+
+    '            ' 👉 multi select (blok biru)
+    '            For Each cell As DataGridViewCell In dgTimeSheet.SelectedCells
+    '                If Not cell.ReadOnly Then
+    '                    cell.Value = firstValue
+
+    '                    ' 🔥 langsung hitung per row (INI YANG PENTING)
+    '                    HitungRow(cell.RowIndex)
+    '                End If
+    '            Next
+
+    '        Else
+    '            ' 👉 paste normal (single cell)
+    '            Dim ci = dgTimeSheet.CurrentCell.ColumnIndex
+    '            Dim ri = dgTimeSheet.CurrentCell.RowIndex
+
+    '            Dim rows = s.Split({ControlChars.CrLf}, StringSplitOptions.RemoveEmptyEntries)
+
+    '            For Each r In rows
+    '                Dim col = ci
+
+    '                For Each c In r.Split(ControlChars.Tab)
+    '                    dgTimeSheet(col, ri).Value = c
+
+    '                    ' 🔥 trigger hitung juga
+    '                    HitungRow(ri)
+
+    '                    col += 1
+    '                Next
+
+    '                ri += 1
+    '            Next
+    '        End If
+    '        dgTimeSheet.EndEdit()
+    '    Catch ex As Exception
+    '        logger.writeLog(Me.GetType().Name, ex.Message & vbCrLf & ex.StackTrace)
+    '    End Try
+    'End Sub
+
     Private Sub PasteCells()
         Try
-            Dim s = Clipboard.GetText
-            Dim ci = dgTimeSheet.CurrentCell.ColumnIndex
-            Dim ri = dgTimeSheet.CurrentCell.RowIndex
-            Dim colCount = dgTimeSheet.Columns.Count
-            Dim rowCount = dgTimeSheet.Rows.Count
-            dgTimeSheet.BeginEdit(True)
+            Dim s = Clipboard.GetText()
+            If String.IsNullOrWhiteSpace(s) Then Exit Sub
 
-            For Each r In s.Split({ControlChars.CrLf}, StringSplitOptions.None)
-                Dim Cell = ci
-                For Each c In r.Split({ControlChars.Tab}, StringSplitOptions.None)
-                    If Cell >= colCount Then Exit For
-                    dgTimeSheet(Cell, ri).Value = c
-                    Cell += 1
+            'dgTimeSheet.BeginEdit(True)
+
+            ' 👉 pecah jadi baris
+            Dim rows = s.Split({ControlChars.CrLf}, StringSplitOptions.RemoveEmptyEntries)
+
+            Dim startRow = dgTimeSheet.CurrentCell.RowIndex
+            Dim startCol = dgTimeSheet.CurrentCell.ColumnIndex
+
+            Dim maxRow = dgTimeSheet.Rows.Count
+            Dim maxCol = dgTimeSheet.Columns.Count
+
+            For i As Integer = 0 To rows.Length - 1
+
+                Dim currentRow = startRow + i
+                If currentRow >= maxRow Then Exit For
+
+                ' 👉 pecah kolom (TAB)
+                Dim cols = rows(i).Split(ControlChars.Tab)
+
+                For j As Integer = 0 To cols.Length - 1
+
+                    Dim currentCol = startCol + j
+                    If currentCol >= maxCol Then Exit For
+
+                    Dim cell = dgTimeSheet(currentCol, currentRow)
+
+                    If Not cell.ReadOnly Then
+                        cell.Value = cols(j)
+                        dgTimeSheet.NotifyCurrentCellDirty(True)
+                    End If
+
                 Next
-                ri += 1
-                If ri >= rowCount Then Exit For
-            Next
 
-            dgTimeSheet.EndEdit()
+                ' 🔥 hitung per baris
+                HitungRow(currentRow)
+
+            Next
+            'dgTimeSheet.EndEdit()
+
         Catch ex As Exception
             logger.writeLog(Me.GetType().Name, ex.Message & vbCrLf & ex.StackTrace)
         End Try
     End Sub
+
+    Private Sub HitungRow(rowIndex As Integer)
+        Dim val = dgTimeSheet(0, rowIndex).Value
+
+        If IsNumeric(val) Then
+            dgTimeSheet(1, rowIndex).Value = val
+        Else
+            dgTimeSheet(1, rowIndex).Value = 0
+        End If
+    End Sub
+
 
     Private Sub dgTimeSheet_KeyDown(sender As Object, e As KeyEventArgs) Handles dgTimeSheet.KeyDown
         Try
@@ -1343,6 +1459,47 @@ ExitAllFor:
                         e.Handled = True
                 End Select
             End If
+
+            If e.KeyCode = Keys.Delete Then
+                dgTimeSheet.EndEdit()
+                deleteSelectedRows()
+                e.Handled = True
+            End If
+        Catch ex As Exception
+            logger.writeLog(Me.GetType().Name, ex.Message & vbCrLf & ex.StackTrace)
+        End Try
+    End Sub
+
+    Sub deleteSelectedRows()
+        Try
+            Dim s = Clipboard.GetText
+            Dim ci = dgTimeSheet.CurrentCell.ColumnIndex
+            Dim ri = dgTimeSheet.CurrentCell.RowIndex
+            Dim colCount = dgTimeSheet.Columns.Count
+            Dim rowCount = dgTimeSheet.Rows.Count
+            dgTimeSheet.BeginEdit(True)
+
+
+            For Each cell As DataGridViewCell In dgTimeSheet.SelectedCells
+                If Not cell.ReadOnly Then
+                    cell.Value = DBNull.Value
+                End If
+            Next
+
+
+
+            'For Each r In s.Split({ControlChars.CrLf}, StringSplitOptions.None)
+            '    Dim Cell = ci
+            '    For Each c In r.Split({ControlChars.Tab}, StringSplitOptions.None)
+            '        If Cell >= colCount Then Exit For
+            '        dgTimeSheet(Cell, ri).Value = c
+            '        Cell += 1
+            '    Next
+            '    ri += 1
+            '    If ri >= rowCount Then Exit For
+            'Next
+
+            dgTimeSheet.EndEdit()
         Catch ex As Exception
             logger.writeLog(Me.GetType().Name, ex.Message & vbCrLf & ex.StackTrace)
         End Try
@@ -1854,5 +2011,10 @@ ExitAllFor:
         Dim o As New DataObject
         o.SetText(s)
         Clipboard.SetDataObject(o, True)
+    End Sub
+
+
+    Private Sub dgTimeSheet_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgTimeSheet.CellContentClick
+
     End Sub
 End Class
