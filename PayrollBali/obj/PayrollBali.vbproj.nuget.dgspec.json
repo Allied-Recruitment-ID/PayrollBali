@@ -52,7 +52,7 @@
           "dependencies": {
             "MySql.Data": {
               "target": "Package",
-              "version": "[8.0.33, )"
+              "version": "[26.7.0, )"
             },
             "System.Data.DataSetExtensions": {
               "target": "Package",

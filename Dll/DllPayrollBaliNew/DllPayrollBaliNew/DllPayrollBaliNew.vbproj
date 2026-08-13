@@ -48,16 +48,16 @@
       <HintPath>..\packages\BouncyCastle.Cryptography.2.2.1\lib\net461\BouncyCastle.Cryptography.dll</HintPath>
     </Reference>
     <Reference Include="DllConnection">
-      <HintPath>G:\Industrial_Trackit Index Testing\TrackitDll\DllConnection.dll</HintPath>
+      <HintPath>\\balsvr02\TrackitDll\DllConnection.dll</HintPath>
     </Reference>
     <Reference Include="DllEncap">
-      <HintPath>G:\Industrial_Trackit Index Testing\TrackitDll\DllEncap.dll</HintPath>
+      <HintPath>\\balsvr02\TrackitDll\DllEncap.dll</HintPath>
     </Reference>
     <Reference Include="DllLogger">
-      <HintPath>G:\Industrial_Trackit Index Testing\TrackitDll\DllLogger.dll</HintPath>
+      <HintPath>\\balsvr02\TrackitDll\DllLogger.dll</HintPath>
     </Reference>
     <Reference Include="DLLSystem">
-      <HintPath>G:\Industrial_Trackit Index Testing\TrackitDll\DLLSystem.dll</HintPath>
+      <HintPath>\\balsvr02\TrackitDll\DLLSystem.dll</HintPath>
     </Reference>
     <Reference Include="Google.Protobuf, Version=3.21.9.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Protobuf.3.21.9\lib\net45\Google.Protobuf.dll</HintPath>

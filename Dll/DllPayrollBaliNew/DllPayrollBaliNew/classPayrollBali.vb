@@ -693,7 +693,7 @@ Public Class classPayrollBali
             dbConn.connectedMySQLPayrollBali()
             cmdmysql.Connection = dbConn.cnnMysql
             cmdmysql.CommandType = CommandType.Text
-            cmdmysql.CommandText = "SELECT firstName, lastName, TRUNCATE(COALESCE(SUM(actualHours),0),2) AS 'actualHours', TRUNCATE(SUM(toBePaidHours),2) AS 'toBePaidHours', TRUNCATE(SUM(baliBaseHourly),2) AS 'baliBaseHourly', TRUNCATE(SUM(baliOvertime),2) AS 'baliOvertime', TRUNCATE(SUM(baliHolidayPay),2) AS 'baliHolidayPay', TRUNCATE(SUM(baliSickPay),2) AS 'baliSickPay', TRUNCATE(SUM(baliFlexiTimeEarned),2) AS 'baliFlexiTimeEarned', TRUNCATE(SUM(baliFlexiTimeTaken),2) AS 'baliFlexiTimeTaken', TRUNCATE(SUM(baliOvertime15x),2) AS 'baliOvertime15x' FROM timesheetbali WHERE " & qry & " GROUP BY firstName,lastName ORDER BY firstName ASC"
+            cmdmysql.CommandText = "SELECT firstName, lastName, ROUND(COALESCE(SUM(actualHours),0),2) AS 'actualHours', ROUND(SUM(toBePaidHours),2) AS 'toBePaidHours', ROUND(SUM(baliBaseHourly),2) AS 'baliBaseHourly', ROUND(SUM(baliOvertime),2) AS 'baliOvertime', ROUND(SUM(baliHolidayPay),2) AS 'baliHolidayPay', ROUND(SUM(baliSickPay),2) AS 'baliSickPay', ROUND(SUM(baliFlexiTimeEarned),2) AS 'baliFlexiTimeEarned', ROUND(SUM(baliFlexiTimeTaken),2) AS 'baliFlexiTimeTaken', ROUND(SUM(baliOvertime15x),2) AS 'baliOvertime15x' FROM timesheetbali WHERE " & qry & " GROUP BY firstName,lastName ORDER BY firstName ASC"
             da.SelectCommand = cmdmysql
             da.Fill(dt)
             Return dt

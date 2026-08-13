@@ -49,7 +49,7 @@ Public Class classLoginPayrollBali
 
             If Not (cnnMysql.State = ConnectionState.Open) Then
                 Try
-                    cnnMysql.ConnectionString = "datasource=" & server & ";port=" & port & ";username=" & userName & ";password=" & password & ";Database=" & DatabaseName & "; SslMode=None; Convert Zero Datetime=True;Allow User Variables=True;Respect Binary flags=false;Connect Timeout=60"
+                    cnnMysql.ConnectionString = "datasource=" & server & ";port=" & port & ";username=" & userName & ";password=" & password & ";Database=" & DatabaseName & "; SslMode=Disabled; Convert Zero Datetime=True;Allow User Variables=True;Respect Binary flags=false;Connect Timeout=60"
                     cnnMysql.Open()
                     Return True
                 Catch ex As Exception
