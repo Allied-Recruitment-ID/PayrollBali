@@ -64,7 +64,7 @@ Public Class classPayrollBali
         Dim da As New MySqlDataAdapter(cmdmysql)
         Dim dateTimeTiday As String = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
         Try
-            dbConn.connectedMySQL()
+            dbConn.connectedMySQLPayrollBali()
             cmdmysql.Parameters.Clear()
             cmdmysql.CommandType = CommandType.Text
             cmdmysql.CommandText = "INSERT INTO staffPayrollBali(fullName, firstName, lastName, cardId, empRecordId) VALUES(@fullNameAdd, @firstNameAdd, @lastNameAdd, @cardIdAdd, @empRecordIdAdd)"
@@ -115,7 +115,7 @@ Public Class classPayrollBali
         Dim da As New MySqlDataAdapter(cmdmysql)
         Dim dateTimeTiday As String = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
         Try
-            dbConn.connectedMySQL()
+            dbConn.connectedMySQLPayrollBali()
             cmdmysql.Parameters.Clear()
             cmdmysql.CommandType = CommandType.Text
             cmdmysql.CommandText = "UPDATE staffPayrollBali SET fullName = @fullName, firstName = @firstName, lastName = @lastName, cardId = @cardId, empRecordId = @empRecordId WHERE id = @idStaff"
@@ -168,7 +168,7 @@ Public Class classPayrollBali
         Dim da As New MySqlDataAdapter(cmdmysql)
         Dim dateTimeTiday As String = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
         Try
-            dbConn.connectedMySQL()
+            dbConn.connectedMySQLPayrollBali()
             cmdmysql.Parameters.Clear()
             cmdmysql.CommandType = CommandType.Text
             cmdmysql.CommandText = "UPDATE staffPayrollBali SET status = '" & 1 & "' WHERE id = @idStaff"
@@ -191,7 +191,7 @@ Public Class classPayrollBali
         Dim da As New MySqlDataAdapter(cmdmysql)
         Dim dateTimeTiday As String = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
         Try
-            dbConn.connectedMySQL()
+            dbConn.connectedMySQLPayrollBali()
             cmdmysql.Parameters.Clear()
             cmdmysql.CommandType = CommandType.Text
             cmdmysql.CommandText = "INSERT INTO timesheetbali(idImport, lastName, firstName, dateTimeSheet, clockOn, clockOff, breaks, actualHours, created_at, staff_add) VALUES(@idImport, @lastName, @firstName, @dateTimeSheet, @clockOn, @clockOff, @breaks, @actualHours, '" & dateImportCreate & "',@staffLogin)"
@@ -272,7 +272,7 @@ Public Class classPayrollBali
             If getMaxIdfromTimesheet().Rows.Count > 0 Then
                 idImport = getMaxIdfromTimesheet().Rows(0).Item("id")
             End If
-            dbConn.connectedMySQL()
+            dbConn.connectedMySQLPayrollBali()
 
             cmdmysql.Parameters.Clear()
             cmdmysql.CommandType = CommandType.Text
@@ -374,7 +374,7 @@ Public Class classPayrollBali
                 qry = "id = '" & id & "'"
             End If
 
-            dbConn.connectedMySQL()
+            dbConn.connectedMySQLPayrollBali()
             cmdmysql.Parameters.Clear()
             cmdmysql.CommandType = CommandType.Text
             cmdmysql.CommandText = "UPDATE timesheetbali SET idImport=@idImport, lastName=@lastName, firstName=@firstName, dateTimeSheet=@datesFixed, clockOn=@clockOn, clockOff=@clockOff, breaks=@breaks, actualHours=@actualHours, update_at='" & dateImportCreate & "', staff_update=@staffLogin WHERE " & qry
@@ -459,7 +459,7 @@ Public Class classPayrollBali
 
             qry = "CONCAT(idImport,firstName,' ',lastName,dateTimeSheet) = '" & idImport & employeeName & datesFixed & "'"
 
-            dbConn.connectedMySQL()
+            dbConn.connectedMySQLPayrollBali()
             cmdmysql.Parameters.Clear()
             cmdmysql.CommandType = CommandType.Text
             cmdmysql.CommandText = "UPDATE timesheetbali SET clockOn=@clockOn, clockOff=@clockOff, breaks=@breaks, actualHours=@actualHours, update_at='" & dateImportCreate & "', staff_update=@staffLogin WHERE " & qry
@@ -517,7 +517,7 @@ Public Class classPayrollBali
                 qry = "id = '" & id & "'"
             End If
 
-            dbConn.connectedMySQL()
+            dbConn.connectedMySQLPayrollBali()
             cmdmysql.Parameters.Clear()
             cmdmysql.CommandType = CommandType.Text
             cmdmysql.CommandText = "UPDATE timesheetbali SET toBePaidHours=@toBePaidHours, baliBaseHourly=@baliBaseHourly, baliOvertime=@baliOvertime, baliHolidayPay=@baliHolidayPay, baliSickPay=@baliSickPay, baliFlexiTimeEarned=@baliFlexiTimeEarned, baliFlexiTimeTaken=@baliFlexiTimeTaken, baliOvertime15x=@baliOvertime15x, update_at='" & dateImportCreate & "', staff_update=@staffLogin WHERE " & qry
@@ -713,7 +713,7 @@ Public Class classPayrollBali
 
             qry = "id = '" & getIdTimesheet & "'"
 
-            dbConn.connectedMySQL()
+            dbConn.connectedMySQLPayrollBali()
             cmdmysql.Parameters.Clear()
             cmdmysql.CommandType = CommandType.Text
             cmdmysql.CommandText = "DELETE FROM timesheetbali WHERE " & qry
